@@ -1,0 +1,24 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @room %>
+
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+      <div class="modal-content">
+            <span class="close">&times;</span>
+            <div><%= render "messages/form", message: @message %></div>
+                  </div>
+
+</div> 
+  <div data-chat-room="<%=@room.name%>">
+  </div>
+<div>
+  <%= link_to "Edit this room", edit_room_path(@room) %> |
+  <%= link_to "Back to rooms", rooms_path %>
+
+  <%= button_to "Destroy this room", @room, method: :delete %>
+</div>
