@@ -15,6 +15,7 @@
 
 </div> 
   <div data-chat-room="<%=@room.name%>">
+    <%=render @room.messages%>
   </div>
 <div>
   <%= link_to "Edit this room", edit_room_path(@room) %> |
