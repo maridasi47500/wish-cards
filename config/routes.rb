@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :texts
   resources :rooms
   resources :messages
   devise_for :users

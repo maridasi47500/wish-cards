@@ -1,0 +1,71 @@
+<%= form_with(model: message) do |form| %>
+  <% if message.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+        <% message.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :sent_by, style: "display: block" %>
+    <%= form.text_field :sent_by %>
+  </div>
+
+  <div>
+    <%= form.label :body, style: "display: block" %>
+    <%= form.text_area :body %>
+
+  </div>
+  <div>
+    <%= form.label :height, style: "display: block" %>
+    <%= form.number_field :height,onchange:"mypic.width=this.value;" %>
+
+  </div>
+  <div>
+    <%= form.label :width, style: "display: block" %>
+    <%= form.number_field :width,onchange:"mypic.height=this.value; %>
+
+  </div>
+
+<style>
+#mypic{
+  border:1px solid black;
+  position:relative;
+  }
+#mybody {
+  position:absolute;
+}
+</style>
+<script>
+  $(document).ready(function() {
+     $("img").on("click", function(event) {
+                 var x = event.pageX - this.offsetLeft;
+                 var y = event.pageY - this.offsetTop;
+                 //alert("X Coordinate: " + x + " Y Coordinate: " + y);
+         var mybody=$("#mybody")[0];
+         var msgbody=$("#message_body")[0];
+         mybody.left=x;
+         mybody.innerHTML=msgbody.value;
+         mybody.top=y;
+             });
+             });
+</script>
+<div id="mypic" width="<%=message.width%>px" height="<%=message.height%>px">
+  <div id="mybody">
+  </div>
+  <img width="100%" height="100%" isMap />
+</div>
+    <%= form.hidden_field :user_id %>
+    <%= form.hidden_field :room_id %>
+    <%= form.hidden_field :bodyx %>
+    <%= form.hidden_field :bodyy%>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

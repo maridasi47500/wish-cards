@@ -13,10 +13,13 @@ var chatChannel=consumer.subscriptions.create({ channel: "ChatChannel", room: ro
 
 	  createLine(data) {
 		      return `
+		      <div id="message_${data["id"]}">
 		            <article class="chat-line">
 			            <span class="speaker">${data["sent_by"]}</span>
 				            <span class="body">${data["body"]}</span>
 					          </article>
+					          <a href="/messages/${data["id"]}/edit">edit</a>
+					          </div>
 						      `
 		    }
 })

@@ -1,4 +1,4 @@
-alert("ertyu")
+//alert("ertyu")
 // Get the modal
  var modal = document.getElementById("myModal");
 

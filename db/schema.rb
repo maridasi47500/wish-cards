@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_14_135144) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_15_194158) do
   create_table "messages", force: :cascade do |t|
     t.integer "user_id"
     t.integer "room_id"
@@ -18,12 +18,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_14_135144) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "height"
+    t.integer "width"
+    t.integer "bodyx"
+    t.integer "bodyy"
+    t.string "image"
   end
 
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "texts", force: :cascade do |t|
+    t.integer "message_id"
+    t.text "content"
+    t.string "size"
+    t.string "color"
+    t.integer "weight"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "x"
+    t.string "y"
   end
 
   create_table "users", force: :cascade do |t|

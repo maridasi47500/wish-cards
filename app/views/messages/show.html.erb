@@ -2,6 +2,18 @@
 
 <%= render @message %>
 
+<button id="myBtn">Ajouter un texte</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+      <!-- Modal content -->
+            <div class="modal-content">
+                          <span class="close">&times;</span>
+                                      <div><%= render "texts/form",text: @text %></div>
+                                                        </div>
+
+</div>
 <div>
   <%= link_to "Edit this message", edit_message_path(@message) %> |
   <%= link_to "Back to messages", messages_path %>
