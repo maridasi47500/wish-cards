@@ -2,35 +2,62 @@
 
 console.log("okok bienvenue messages");
 var myid11=$("#myid1"); 
+var myid;
 if (myid11[0]){
-var myid=$("#myid1").html(); 
+myid=$("#myid1").html(); 
 }
 var mytexts=document.getElementsByClassName("mytext");//message_texts_attributes_0_x   //edit value
 var ball;
+var balll={};
 for (var i = 0;i<mytexts.length;i++){
-		                   ball = mytexts[i];
-	ball.onmousedown = function(event) {
+		                   balll[i] = mytexts[i];
+	console.log(mytexts[i]);
+	balll[i].onmousedown = function(event) {
+			     myid=event.target.id.split("_")[1];
+		let zatball=event.target;
+		console.log(zatball)
 
-		  let shiftX = event.clientX - ball.getBoundingClientRect().left;
-		  let shiftY = event.clientY - ball.getBoundingClientRect().top;
+		                   var pic = document.getElementById('mypic'+window.location.pathname.split("/")[2]).getBoundingClientRect();
+	//zatball.style.top="0"+"px";
+	//zatball.style.left="0"+"px";
+		  let addleft = zatball.getBoundingClientRect().left;
+		  let addright= zatball.getBoundingClientRect().top;
+		console.log(addleft,addright);
+		  let shiftX = event.clientX - zatball.getBoundingClientRect().left;
+		  let shiftY = event.clientY - zatball.getBoundingClientRect().top;
 
-		  ball.style.position = 'absolute';
-		  ball.style.zIndex = 1000;
-		  document.body.append(ball);
+
+	console.log(zatball,zatball.style.top);
+		//var div1 = document.createElement('div');
+		//$(div1).addClass("mytext")
+		//    .html(zatball.innerHTML);
+		//
+		//zatball.remove();	
+		//zatball=div1;
+
+
+		  zatball.style.position = 'absolute';
+		  zatball.style.zIndex = 1000;
+
+
+
+		  document.body.append(zatball);
+
 
 		  moveAt(event.pageX, event.pageY);
 
-		  // moves the ball at (pageX, pageY) coordinates
-		   // taking initial shifts into account
 		     function moveAt(pageX, pageY) {
-			     var myid=ball.id.split("_")[1];
-		  var myball = ball.getBoundingClientRect();
+
+		  var myball = zatball.getBoundingClientRect();
 		                   var pic = document.getElementById('mypic'+window.location.pathname.split("/")[2]).getBoundingClientRect();
+		                   console.log('message_texts_attributes_'+myid+'_x');
 		                   var msgw = document.getElementById('message_texts_attributes_'+myid+'_x');
 		                   var msgh = document.getElementById('message_texts_attributes_'+myid+"_y");
-		         ball.style.left = pageX - shiftX + 'px';
+		                   console.log('message_texts_attributes_'+myid+"_y",zatball.dataset.top,zatball.dataset.left);
+		         zatball.style.left = pageX - shiftX + 'px';
 		         msgw.value = myball.left - pic.left;
-		             ball.style.top = pageY - shiftY + 'px';
+		             zatball.style.top = pageY - shiftY + 'px';
+
 
 		         msgh.value = myball.top - pic.top;
 		               }
@@ -43,16 +70,18 @@ for (var i = 0;i<mytexts.length;i++){
 		                           document.addEventListener('mousemove', onMouseMove);
 		
 		                             // drop the ball, remove unneeded handlers
-		                               ball.onmouseup = function() {
+		                               zatball.onmouseup = function() {
 		                                   document.removeEventListener('mousemove', onMouseMove);
-		                                       ball.onmouseup = null;
+		                                       zatball.onmouseup = null;
+
 		                                         };
 		
 		                                         };
 		
-		                                         ball.ondragstart = function() {
+		                                         balll[i].ondragstart = function() {
 		                                           return false;
 		                                           };
+	console.log(balll)
 }
 
 

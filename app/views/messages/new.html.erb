@@ -1,7 +1,8 @@
 <h1>New message</h1>
 
 <%= render "form", message: @message %>
-
+  <div data-chat-room="<%=@message.room.name%>">
+              </div>
 <br>
 
 <div>

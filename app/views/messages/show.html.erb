@@ -1,7 +1,20 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @message %>
+  <div data-chat-room="<%=@message.room.name%>">
+          </div>
+<button id="myBtnpic">Ajouter un texte</button>
 
+<!-- The Modal -->
+<div id="myModalpic" class="modalpic">
+
+      <!-- Modal content -->
+            <div class="modal-contentpic">
+                          <span class="closepic">&times;</span>
+                                      <div><%= render "pics/form",pic: @pic %></div>
+                                                        </div>
+
+</div>
 <button id="myBtn">Ajouter un texte</button>
 
 <!-- The Modal -->

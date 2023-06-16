@@ -31,7 +31,12 @@
 
                                                                                                                                                                                                                                                                      <div id="mypic<%=message.id%>" >
     <span class="speaker"><%=message.sent_by%> (<%=message.user.email%>)</span>
-    <%=render message.texts%>
+    <% message.texts.each do |text|%>
+      <div class="mytext" style="font-weight:<%=text.weight%>;color:<%=text.color%>;font-size:<%=text.size%>px;z-index:1000;position:absolute;top:<%=text.y%>px;left:<%=text.x%>px;background-color:<%=text.transparent ? "transparent" : text.fond%>;" id="<%= dom_id text %>">
+              <%= text.content %>
+
+        </div>
+    <%end%>
                                                                                                                                                                                                                                                                           <div id="move<%=message.id%>">
 
                                                                                                                                                                                                                                                                                     </div>

@@ -1,0 +1,42 @@
+<%= form_with(model: pic) do |form| %>
+  <% if pic.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(pic.errors.count, "error") %> prohibited this pic from being saved:</h2>
+
+      <ul>
+        <% pic.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :filename, style: "display: block" %>
+    <%= form.text_field :filename %>
+  </div>
+
+  <div>
+    <%= form.label :x, style: "display: block" %>
+    <%= form.text_field :x %>
+  </div>
+
+  <div>
+    <%= form.label :y, style: "display: block" %>
+    <%= form.text_field :y %>
+  </div>
+
+  <div>
+    <%= form.label :width, style: "display: block" %>
+    <%= form.text_field :width %>
+  </div>
+
+  <div>
+    <%= form.label :height, style: "display: block" %>
+    <%= form.text_field :height %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

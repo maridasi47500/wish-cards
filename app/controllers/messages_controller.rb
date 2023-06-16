@@ -8,7 +8,8 @@ class MessagesController < ApplicationController
 
   # GET /messages/1 or /messages/1.json
   def show
-    @text=Text.new(message_id:@message.id)
+    @text=Text.new(message_id:@message.id,fond:"#ffffff")
+    @pic=Pic.new(message_id:@message.id)
   end
 
   # GET /messages/new
@@ -41,6 +42,7 @@ class MessagesController < ApplicationController
   def update
     respond_to do |format|
       if @message.update(message_params)
+        MessageJob.perform_now(@message)
         format.html { redirect_to message_url(@message), notice: "Message was successfully updated." }
         format.json { render :show, status: :ok, location: @message }
       else
@@ -68,6 +70,6 @@ class MessagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def message_params
-      params.require(:message).permit(:sent_by, :body,:user_id,:room_id, :height, :width, :bodyx, :bodyy,:image)
+      params.require(:message).permit(:sent_by, :body,:user_id,:room_id, :height, :width, :bodyx, :bodyy,:image,:texts_attributes=>{})
     end
 end

@@ -38,13 +38,53 @@
 
   </div>
   <div class="mytexts">
+
     <%=form.fields_for :texts do |f|%>
-      <div>
-        <%=f.text_field :content%>
-        <%=f.hidden_field :x%>
-        <%=f.hidden_field :y%>
-      </div>
+    <table>
+        <tr class="tabletext">
+          <td></td>
+          <td>text #<%=f.index + 1%></td>
+      </tr>
+        <tr class="tabletext">
+          <td>content</td>
+          <td><%=f.text_field :content,onkeyup:"text_#{f.object.id}.innerHTML=this.value;"%></td>
+        <%=f.hidden_field :x, id: "message_texts_attributes_#{f.object.id}_x"%>
+        <%=f.hidden_field :y, id: "message_texts_attributes_#{f.object.id}_y"%>
+      </tr>
+        <tr class="tabletext">
+          <td>font size</td>
+          <td><%=f.number_field :size,onkeyup:"text_#{f.object.id}.style.fontSize=this.value+'px';"%></td>
+
+      </tr>
+        <tr class="tabletext">
+          <td>font color</td>
+          <td><%=f.color_field :color,onchange:"text_#{f.object.id}.style.color=this.value;",onkeyup:"text_#{f.object.id}.style.color=this.value;"%></td>
+
+      </tr>
+        <tr class="tabletext">
+          <td>font weight</td>
+          <td><%=f.number_field :weight,onkeyup:"text_#{f.object.id}.style.fontWeight=this.value;"%></td>
+
+      </tr>
+        <tr class="tabletext">
+          <td>couleur fond</td>
+          <td><%=f.color_field :fond,onchange:"text_#{f.object.id}.style.backgroundColor=this.value;",onkeyup:"text_#{f.object.id}.style.backgroundColor=this.value;"%></td>
+
+      </tr>
+        <tr class="tabletext">
+          <td>fond transparent</td>
+          <td> 
+              <%= f.label :transparent %><br />
+              <%= f.label :transparent, "Oui", value: "true"  %>
+              <%= f.radio_button :transparent, true,onchange:"this.checked ? (text_#{f.object.id}.style.backgroundColor='transparent') : (text_#{f.object.id}.style.backgroundColor=message_texts_attributes_#{f.index}_fond.value);" %>
+              <%= f.label :transparent, "Non", value: "false" %>
+              <%= f.radio_button :transparent, false,onchange:"message_texts_attributes_#{f.index}_transparent_true.checked === '1' ? (text_#{f.object.id}.style.backgroundColor='transparent') : (text_#{f.object.id}.style.backgroundColor=message_texts_attributes_#{f.index}_fond.value);" %>
+            </td>
+
+      </tr>
+    </table>
     <%end%>
+
   </div>
   <%=render message%>
 <script>

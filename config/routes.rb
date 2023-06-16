@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :pics
   resources :texts
   resources :rooms
   resources :messages
