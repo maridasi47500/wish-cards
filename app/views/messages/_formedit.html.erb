@@ -37,6 +37,7 @@
     <%= form.file_field :image %>
 
   </div>
+  <div class="mytextsandpics">
   <div class="mytexts">
 
     <%=form.fields_for :texts do |f|%>
@@ -85,6 +86,37 @@
     </table>
     <%end%>
 
+  </div>
+  <div class="mypics">
+
+    <%=form.fields_for :pics do |f|%>
+    <table>
+        <tr class="tabletext">
+          <td></td>
+          <td>pic #<%=f.index + 1%></td>
+      </tr>
+        <tr class="tabletext">
+          <td>content</td>
+          <td><%=f.text_field :x%>
+      </tr>
+        <tr class="tabletext">
+          <td>font size</td>
+          <td><%=f.text_field :y%>
+
+      </tr>
+        <tr class="tabletext">
+          <td>content</td>
+          <td><%=f.text_field :width%>
+      </tr>
+        <tr class="tabletext">
+          <td>font size</td>
+          <td><%=f.text_field :height%>
+
+      </tr>
+    </table>
+    <%end%>
+
+  </div>
   </div>
   <%=render message%>
 <script>

@@ -1,6 +1,10 @@
-.mytexts {
+.mytextsandpics {
 	position:absolute;
 	top:200px;
-	right:200px;
+	right:400px;
+}
+.mypics {
+}
+.mytexts {
 }
 tr.tabletext{border:1px solid black;}
