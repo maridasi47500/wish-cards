@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_16_131836) do
   end
 
   create_table "pics", force: :cascade do |t|
+    t.integer "message_id"
     t.string "filename"
     t.string "x"
     t.string "y"
