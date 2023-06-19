@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
+  get 'codeform/pics'
+  resources :textanimations
+  resources :picanimations
   resources :pics
   resources :texts
   resources :rooms
-  resources :messages
+  resources :messages do
+    member do
+      get "css"
+    end
+  end
   devise_for :users
   root "rooms#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

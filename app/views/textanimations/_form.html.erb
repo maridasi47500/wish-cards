@@ -1,0 +1,47 @@
+<%= form_with(model: textanimation) do |form| %>
+  <% if textanimation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(textanimation.errors.count, "error") %> prohibited this textanimation from being saved:</h2>
+
+      <ul>
+        <% textanimation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :pic_id, style: "display: block" %>
+    <%= form.number_field :pic_id %>
+  </div>
+
+  <div>
+    <%= form.label :percent, style: "display: block" %>
+    <%= form.text_field :percent %>
+  </div>
+
+  <div>
+    <%= form.label :translatex, style: "display: block" %>
+    <%= form.text_field :translatex %>
+  </div>
+
+  <div>
+    <%= form.label :translatey, style: "display: block" %>
+    <%= form.text_field :translatey %>
+  </div>
+
+  <div>
+    <%= form.label :rotate, style: "display: block" %>
+    <%= form.text_field :rotate %>
+  </div>
+
+  <div>
+    <%= form.label :color, style: "display: block" %>
+    <%= form.text_field :color %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

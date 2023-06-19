@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @picanimation %>
+
+<div>
+  <%= link_to "Edit this picanimation", edit_picanimation_path(@picanimation) %> |
+  <%= link_to "Back to picanimations", picanimations_path %>
+
+  <%= button_to "Destroy this picanimation", @picanimation, method: :delete %>
+</div>

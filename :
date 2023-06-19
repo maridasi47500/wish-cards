@@ -1,4 +1,5 @@
-<%= form_with(model: message) do |form| %>
+<div id="myid1"><%=message.id%></div>
+<%= form_with(model: message,id:{html:"css-form"}) do |form| %>
   <% if message.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(message.errors.count, "error") %> prohibited this message from being saved:</h2>
@@ -23,43 +24,186 @@
   </div>
   <div>
     <%= form.label :height, style: "display: block" %>
-    <%= form.number_field :height,onchange:"mypic.width=this.value;" %>
+    <%= form.number_field :height,step:"0.01" %>
 
   </div>
   <div>
     <%= form.label :width, style: "display: block" %>
-    <%= form.number_field :width,onchange:"mypic.height=this.value; %>
+    <%= form.number_field :width,step:"0.01"%>
 
   </div>
+  <div>
+    <%= form.label :image, style: "display: block" %>
+    <%= form.file_field :image %>
 
-<style>
-#mypic{
-  border:1px solid black;
-  position:relative;
-  }
-#mybody {
-  position:absolute;
-}
-</style>
+  </div>
+  <div class="mytextsandpics">
+  <div class="mytexts">
+
+    <%=form.fields_for :texts do |f|%>
+    <table>
+        <tr class="tabletext">
+          <td></td>
+          <td>text #<%=f.index + 1%></td>
+      </tr>
+        <tr class="tabletext">
+          <td>content</td>
+          <td><%=f.text_field :content,onkeyup:"text_#{f.object.id}.innerHTML=this.value;"%></td>
+        <%=f.hidden_field :x, id: "message_texts_attributes_#{f.object.id}_x"%>
+        <%=f.hidden_field :y, id: "message_texts_attributes_#{f.object.id}_y"%>
+      </tr>
+        <tr class="tabletext">
+          <td>font size</td>
+          <td><%=f.number_field :size,onkeyup:"text_#{f.object.id}.style.fontSize=this.value+'px';"%></td>
+
+      </tr>
+        <tr class="tabletext">
+          <td>font color</td>
+          <td><%=f.color_field :color,onchange:"text_#{f.object.id}.style.color=this.value;",onkeyup:"text_#{f.object.id}.style.color=this.value;"%></td>
+
+      </tr>
+        <tr class="tabletext">
+          <td>font weight</td>
+          <td><%=f.number_field :weight,onkeyup:"text_#{f.object.id}.style.fontWeight=this.value;"%></td>
+
+      </tr>
+        <tr class="tabletext">
+          <td>couleur fond</td>
+          <td><%=f.color_field :fond,onchange:"text_#{f.object.id}.style.backgroundColor=this.value;",onkeyup:"text_#{f.object.id}.style.backgroundColor=this.value;"%></td>
+
+      </tr>
+        <tr class="tabletext">
+          <td>fond transparent</td>
+          <td> 
+              <%= f.label :transparent %><br />
+              <%= f.label :transparent, "Oui", value: "true"  %>
+              <%= f.radio_button :transparent, true,onchange:"this.checked ? (text_#{f.object.id}.style.backgroundColor='transparent') : (text_#{f.object.id}.style.backgroundColor=message_texts_attributes_#{f.index}_fond.value);" %>
+              <%= f.label :transparent, "Non", value: "false" %>
+              <%= f.radio_button :transparent, false,onchange:"message_texts_attributes_#{f.index}_transparent_true.checked === '1' ? (text_#{f.object.id}.style.backgroundColor='transparent') : (text_#{f.object.id}.style.backgroundColor=message_texts_attributes_#{f.index}_fond.value);" %>
+            </td>
+
+      </tr>
+        <tr class="tabletext">
+          <td>z-index</td>
+          <td><%=f.number_field :zindex,onchange:"text_#{f.object.id}.style.zIndex=this.value;",onkeyup:"text_#{f.object.id}.style.zIndex=this.value;",max:99%></td>
+
+      </tr>
+    </table>
+    <%=f.fields_for :textanimations do |ff|%>
+    <table>
+        <tr class="tabletext">
+          <td>&ensp;</td>
+          <td>text animation #<%=ff.index + 1%></td>
+      </tr>
+
+    </table>
+    <%end%>
+    <%end%>
+
+  </div>
+  <div class="mypics">
+
+    <%=form.fields_for :pics do |f|%>
+    <table>
+        <tr class="tabletext">
+          <td>&ensp;</td>
+          <td>pic #<%=f.index + 1%></td>
+      </tr>
+      <td><%=f.hidden_field :x,id:"message_pics_attributes_#{f.object.id}_x"%>
+          <td><%=f.hidden_field :y,id:"message_pics_attributes_#{f.object.id}_y"%>
+        <tr class="tabletext">
+          <td><%=f.label :width%>
+          <td><%=f.text_field :width,onchange:"pic_#{f.object.id}.style.width=this.value;"%>
+      </tr>
+        <tr class="tabletext">
+          <td><%=f.label :height%>
+          <td><%=f.text_field :height,onchange:"pic_#{f.object.id}.style.width=this.value;"%>
+
+      </tr>
+        <tr class="tabletext">
+          <td>couleur fond</td>
+          <td><%=f.color_field :fond,onchange:"pic_#{f.object.id}.style.backgroundColor=this.value;",onkeyup:"pic_#{f.object.id}.style.backgroundColor=this.value;"%></td>
+
+      </tr>
+        <tr class="tabletext">
+          <td>fond transparent</td>
+          <td> 
+              <%= f.label :transparent %><br />
+              <%= f.label :transparent, "Oui", value: "true"  %>
+              <%= f.radio_button :transparent, true,onchange:"this.checked ? (pic_#{f.object.id}.style.backgroundColor='transparent') : (pic_#{f.object.id}.style.backgroundColor=message_pics_attributes_#{f.index}_fond.value);" %>
+              <%= f.label :transparent, "Non", value: "false" %>
+              <%= f.radio_button :transparent, false,onchange:"message_pics_attributes_#{f.index}_transparent_true.checked === '1' ? (pic_#{f.object.id}.style.backgroundColor='transparent') : (pic_#{f.object.id}.style.backgroundColor=message_pics_attributes_#{f.index}_fond.value);" %>
+            </td>
+
+      </tr>
+        <tr class="tabletext">
+          <td>z-index</td>
+          <td><%=f.number_field :zindex,onchange:"pic_#{f.object.id}.style.zIndex=this.value;",onkeyup:"pic_#{f.object.id}.style.zIndex=this.value;",max:99%></td>
+
+      </tr>
+    </table>
+    <%=f.fields_for :picanimations do |ff|%>
+    <table>
+        <tr class="tabletext">
+          <td>&ensp;</td>
+          <td>pic animation #<%=ff.index + 1%></td>
+      </tr>
+      <tr>
+    <%= ff.label :percent, style: "display: block" %>
+        <%= ff.range_field :percent,list:"values" %>
+
+
+            <datalist id="values">
+                      <option class="mytextorpic" value="0" label="début"></option>
+                              <option class="mytextorpic" value="25" label="vers le début"></option>
+                                      <option class="mytextorpic" value="50" label="milieu"></option>
+                                              <option class="mytextorpic" value="75" label="vers la fin"></option>
+                                                      <option class="mytextorpic" value="100" label="fin"></option>
+                                                          </datalist>
+
+                                                            </tr>
+
+                                                              <tr>
+                                                                    <%= ff.label :translatex, style: "display: block" %>
+                                                                        <%= ff.text_field :translatex %>
+                                                                          </tr>
+
+                                                                            <tr>
+                                                                                  <%= ff.label :translatey, style: "display: block" %>
+                                                                                      <%= ff.text_field :translatey %>
+                                                                                        </tr>
+
+                                                                                          <tr>
+
+                                                                                                <%= ff.range_field :rotate, min:"-365", max:365,list:"valuesrotate" %>
+                                                                                                    <%= ff.label :rotate, style: "display: block" %>
+                                                                                                        <datalist id="valuesrotate">
+                                                                                                                  <option class="mytextorpic" value="-365" label="rotate <-"></option>
+                                                                                                                          <option class="mytextorpic" value="0" label="don't rotate"></option>
+                                                                                                                                  <option class="mytextorpic" value="365" label="rotate ->"></option>
+                                                                                                                                      </datalist>
+
+                                                                                                                                        </tr>
+
+                                                                                                                                          <tr>
+                                                                                                                                                <%= ff.label :color, style: "display: block" %>
+                                                                                                                                                    <%= ff.text_field :color %>
+                                                                                                                                                      </tr>
+    </table>
+    <%end%>
+    <%end%>
+
+  </div>
+  </div>
+  <%=render message%>
 <script>
-  $(document).ready(function() {
-     $("img").on("click", function(event) {
-                 var x = event.pageX - this.offsetLeft;
-                 var y = event.pageY - this.offsetTop;
-                 //alert("X Coordinate: " + x + " Y Coordinate: " + y);
-         var mybody=$("#mybody")[0];
-         var msgbody=$("#message_body")[0];
-         mybody.left=x;
-         mybody.innerHTML=msgbody.value;
-         mybody.top=y;
-             });
-             });
+  function editmypicwidth(){
+mypic.style.width=String(this.value)+'px';
+    }
+  function editmypicheight(){
+mypic.style.height=String(this.value)+'px';
+    }
 </script>
-<div id="mypic" width="<%=message.width%>px" height="<%=message.height%>px">
-  <div id="mybody">
-  </div>
-  <img width="100%" height="100%" isMap />
-</div>
     <%= form.hidden_field :user_id %>
     <%= form.hidden_field :room_id %>
     <%= form.hidden_field :bodyx %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_19_124605) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_19_130829) do
   create_table "messages", force: :cascade do |t|
     t.integer "user_id"
     t.integer "room_id"
@@ -23,6 +23,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_19_124605) do
     t.integer "bodyx"
     t.integer "bodyy"
     t.string "image"
+  end
+
+  create_table "picanimations", force: :cascade do |t|
+    t.integer "pic_id"
+    t.string "percent"
+    t.string "translatex"
+    t.string "translatey"
+    t.string "rotate"
+    t.string "color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pics", force: :cascade do |t|
@@ -41,6 +52,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_19_124605) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "textanimations", force: :cascade do |t|
+    t.integer "text_id"
+    t.string "percent"
+    t.string "translatex"
+    t.string "translatey"
+    t.string "rotate"
+    t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

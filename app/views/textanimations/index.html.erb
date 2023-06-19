@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Textanimations</h1>
+
+<div id="textanimations">
+  <% @textanimations.each do |textanimation| %>
+    <%= render textanimation %>
+    <p>
+      <%= link_to "Show this textanimation", textanimation %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New textanimation", new_textanimation_path %>

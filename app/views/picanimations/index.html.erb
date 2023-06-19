@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Picanimations</h1>
+
+<div id="picanimations">
+  <% @picanimations.each do |picanimation| %>
+    <%= render picanimation %>
+    <p>
+      <%= link_to "Show this picanimation", picanimation %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New picanimation", new_picanimation_path %>

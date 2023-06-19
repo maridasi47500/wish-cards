@@ -1,5 +1,11 @@
 <div id="myid1"><%=message.id%></div>
-<%= form_with(model: message,html:{id:"frm-editmsg"}) do |form| %>
+<%message.pics.each_with_index do |pic,i|%>
+  <div id="pic_id<%=pic.id%>" data-myid="<%=pic.id%>" data-id="<%=i%>" data-anim="<%=pic.picanimations.length%>" hidden></div>
+<%end%>
+<%message.texts.each_with_index do |pic,i|%>
+  <div id="text_id<%=pic.id%>" data-myid="<%=pic.id%>" data-id="<%=i%>" data-anim="<%=pic.textanimations.length%>" hidden></div>
+<%end%>
+<%= form_with(model: message,html:{id:"css-frm"}) do |form| %>
   <% if message.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(message.errors.count, "error") %> prohibited this message from being saved:</h2>
@@ -95,6 +101,7 @@
           <td>&ensp;</td>
           <td>text animation #<%=ff.index + 1%></td>
       </tr>
+
     </table>
     <%end%>
     <%end%>
@@ -103,20 +110,21 @@
   <div class="mypics">
 
     <%=form.fields_for :pics do |f|%>
-    <table>
+      <table class="pictable<%=f.object.id%>">
         <tr class="tabletext">
           <td>&ensp;</td>
           <td>pic #<%=f.index + 1%></td>
+          <td><%=f.hidden_field :x,id:"message_pics_attributes_#{f.object.id}_x"%></td>
+          <td><%=f.hidden_field :y,id:"message_pics_attributes_#{f.object.id}_y"%></td>
       </tr>
-      <td><%=f.hidden_field :x,id:"message_pics_attributes_#{f.object.id}_x"%>
-          <td><%=f.hidden_field :y,id:"message_pics_attributes_#{f.object.id}_y"%>
+
         <tr class="tabletext">
-          <td><%=f.label :width%>
-          <td><%=f.text_field :width,onchange:"pic_#{f.object.id}.style.width=this.value;"%>
+          <td><%=f.label :width%></td>
+          <td><%=f.text_field :width,onchange:"pic_#{f.object.id}.style.width=this.value;"%></td>
       </tr>
         <tr class="tabletext">
-          <td><%=f.label :height%>
-          <td><%=f.text_field :height,onchange:"pic_#{f.object.id}.style.width=this.value;"%>
+          <td><%=f.label :height%></td>
+          <td><%=f.text_field :height,onchange:"pic_#{f.object.id}.style.width=this.value;"%></td>
 
       </tr>
         <tr class="tabletext">
@@ -142,11 +150,56 @@
       </tr>
     </table>
     <%=f.fields_for :picanimations do |ff|%>
-    <table>
+      <table class="picanimationtable<%=ff.index%>_id<%=f.object.id%>" data-picid="<%=f.index%>" data-animid="<%=ff.index+1%>">
         <tr class="tabletext">
           <td>&ensp;</td>
-          <td>pic animation #<%=ff.index + 1%></td>
+          <td> animation for pic #<%=f.index + 1%></td>
       </tr>
+      <tr>
+        <td><%= ff.label :percent, style: "display: block" %></td>
+        <td><%= ff.range_field :percent,list:"values",id:"form_picanimations#{f.object.id}_#{ff.index}" %>
+
+
+            <datalist id="values">
+                      <option class="mytextorpic" value="0" label="début"></option>
+                              <option class="mytextorpic" value="25" label="vers le début"></option>
+                                      <option class="mytextorpic" value="50" label="milieu"></option>
+                                              <option class="mytextorpic" value="75" label="vers la fin"></option>
+                                                      <option class="mytextorpic" value="100" label="fin"></option>
+            </datalist></td>
+
+                                                            </tr>
+
+                                                              <tr>
+                                                                <td> <%= ff.label :translatex, style: "display: block" %></td>
+                                                                <td><%= ff.text_field :translatex %></td>
+                                                                          </tr>
+
+                                                                            <tr>
+                                                                              <td> <%= ff.label :translatey, style: "display: block" %></td>
+                                                                              <td><%= ff.text_field :translatey %></td>
+                                                                                        </tr>
+
+                                                                                          <tr>
+
+
+                                                                                            <td> <%= ff.label :rotate, style: "display: block" %></td>
+                                                                                            <td><%= ff.range_field :rotate, min:"-365", max:365,list:"valuesrotate" %>
+                                                                                                        <datalist id="valuesrotate">
+
+                                                                                                                  <option class="mytextorpic" value="-365" label="rotate <-"></option>
+                                                                                                                          <option class="mytextorpic" value="0" label="don't rotate"></option>
+                                                                                                                                  <option class="mytextorpic" value="365" label="rotate ->"></option>
+                                                                                                                                      </datalist>
+
+                                                                                                                                        </td>
+                                                                                                                                        </tr>
+
+                                                                                                                                          <tr>
+                                                                                                                                            <td>    <%= ff.label :color, style: "display: block" %>
+                                                                                                                                            </td>
+                                                                                                                                            <td>    <%= ff.color_field :color %></td>
+                                                                                                                                                      </tr>
     </table>
     <%end%>
     <%end%>

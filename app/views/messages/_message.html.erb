@@ -15,6 +15,22 @@
         background:white;
         position:absolute;
       }
+      <%message.pics.each do |pic|%>
+        .mypicanimation<%=pic.id%> {
+          animation-duration: 3s;
+          animation-delay: 0s;
+          animation-name: picanimation<%=pic.id%>;
+        }
+      @keyframes picanimation<%=pic.id%> {
+        <%pic.picanimations.each do |x|%>
+          <%=x.percent%>% {
+            transform: translateX(<%=x.translatex.to_i%>px) translateY(<%=x.translatey.to_i%>px) rotate(<%=x.rotate%>deg);
+            color: <%=x.color||"#ffffff"%>;
+                      }
+        <%end%>
+      }
+
+      <%end%>
                                                                                                                                                                                                                                                            #mypic<%=message.id%>{
 
                                                                                                                                                                                                                                                                border:1px solid black;
@@ -32,7 +48,7 @@
                                                                                                                                                                                                                                                                      <div id="mypic<%=message.id%>" >
     <span class="speaker"><%=message.sent_by%> (<%=message.user.email%>)</span>
     <% message.pics.each do |text|%>
-      <img class="mypic" id="<%= dom_id text %>" style="z-index:<%=text.zindex || 1000%>;position:absolute;top:<%=text.y%>px;left:<%=text.x%>px;width:<%=text.width%>px;height:<%=text.height%>px;background-color:<%=text.transparent ? "transparent" : text.fond%>;" src="/uploads/<%=text.filename%>"/>
+      <img data-myx="<%=text.x%>" data-myy="<%=text.y%>" class="mypic mypicanimation<%=text.id%>" id="<%= dom_id text %>" style="z-index:<%=text.zindex || 1000%>;position:absolute;top:<%=text.y%>px;left:<%=text.x%>px;width:<%=text.width%>px;height:<%=text.height%>px;background-color:<%=text.transparent ? "transparent" : text.fond%>;" src="/uploads/<%=text.filename%>"/>
 
     <%end%>
     <% message.texts.each do |text|%>

@@ -1,0 +1,28 @@
+<h1>Editing message</h1>
+<%=form_with do |ff|%>
+                                                                                                                                                                                                                                                                                                                                                     <table>
+     <tr>
+           <%= ff.label :percent, style: "display: block" %>
+                   <%= ff.range_field :percent,list:"values" %>
+
+
+                               <datalist id="values">
+                                                       <option class="mytextorpic" value="0" label="début"></option>
+                                                                                     <option class="mytextorpic" value="25" label="vers le début"></option>
+                                                                                                                           <option class="mytextorpic" value="50" label="milieu"></option>
+                                                                                                                                                                         <option class="mytextorpic" value="75" label="vers la fin"></option>
+                                                                                                                                                                                                                               <option class="mytextorpic" value="100" label="fin"></option>
+                                                                                                                                                                                                                                                                                         </datalist>
+
+                                                                                                                                                                                                                                                                                                                                                     </tr>
+                                                                                                                                                                                                                                                                                                                                                     </table>
+                                                                                                                                                                                                                                                                                                                                                   <%end%>
+
+<%= render "formcss", message: @message %>
+
+<br>
+
+<div>
+  <%= link_to "Show this message", @message %> |
+  <%= link_to "Back to messages", messages_path %>
+</div>

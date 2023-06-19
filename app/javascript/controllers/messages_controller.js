@@ -56,11 +56,16 @@ for (var y = 0;y<mypics.length;y++){
 		                   var msgh = document.getElementById('message_pics_attributes_'+myid+"_y");
 		                   console.log('message_pics_attributes_'+myid+"_y",zatball.dataset.top,zatball.dataset.left);
 		         zatball.style.left = pageX - shiftX + 'px';
-		         msgw.value = myball.left - pic.left;
+
 		             zatball.style.top = pageY - shiftY + 'px';
 
 
+
+			     if ($("#frm-editmsg")[0] && msgw && msgh){
+		         msgw.value = myball.left - pic.left;
 		         msgh.value = myball.top - pic.top;
+			     }
+
 		               }
 		
 		                 function onMouseMove(event) {
@@ -74,6 +79,28 @@ for (var y = 0;y<mypics.length;y++){
 		                               zatball.onmouseup = function() {
 		                                   document.removeEventListener('mousemove', onMouseMove);
 		                                       zatball.onmouseup = null;
+			     myid=event.target.id.split("_")[1];
+			     if ($("#css-frm")[0]){
+				     console.log("css animations");
+			     }
+			     console.log("[id^='form_picanimations"+myid+"'][value="+$("#percent").val()+"]");
+			     console.log($("#css-frm").length > 0);
+			     console.log($("[id^='form_picanimations"+myid+"'][value="+$("#percent").val()+"]").length == 0);
+			     if ($("#css-frm").length > 0 && $("[id^='form_picanimations"+myid+"'][value="+$("#percent").val()+"]").length === 0){
+
+var mypicid=$("#pic_id"+myid)[0];
+				     console.log("ajoute un champ");
+				     console.log(mypicid);
+		                   var pic = document.getElementById('mypic'+window.location.pathname.split("/")[2]).getBoundingClientRect();
+var myleft=event.target.getBoundingClientRect().left - pic.left - Number(event.target.dataset.myx);
+var mytop=event.target.getBoundingClientRect().top - pic.top - Number(event.target.dataset.myy);
+
+$.ajax({url:"/codeform/pics",data:{percent:$("#percent").val(), x:myleft,y:mytop, picid: mypicid.dataset.id, objid:myid,picanimid:mypicid.dataset.anim}, success:function(data){
+				     console.log("insérer après", $(".pictable"+(mypicid.dataset.myid)));
+				     $(".pictable"+(mypicid.dataset.myid)).after(data);
+	mypicid.dataset.id=Number(mypicid.dataset.id)+1;
+}});
+			     }
 
 		                                         };
 		

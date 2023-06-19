@@ -1,0 +1,62 @@
+<%= form_with(model: picanimation) do |form| %>
+  <% if picanimation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(picanimation.errors.count, "error") %> prohibited this picanimation from being saved:</h2>
+
+      <ul>
+        <% picanimation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= form.hidden_field :pic_id %>
+
+
+  <div>
+    <%= form.label :percent, style: "display: block" %>
+    <%= form.range_field :percent,list:"values" %>
+
+
+    <datalist id="values">
+        <option class="mytextorpic" value="0" label="début"></option>
+        <option class="mytextorpic" value="25" label="vers le début"></option>
+        <option class="mytextorpic" value="50" label="milieu"></option>
+        <option class="mytextorpic" value="75" label="vers la fin"></option>
+        <option class="mytextorpic" value="100" label="fin"></option>
+    </datalist>
+
+  </div>
+
+  <div>
+    <%= form.label :translatex, style: "display: block" %>
+    <%= form.text_field :translatex %>
+  </div>
+
+  <div>
+    <%= form.label :translatey, style: "display: block" %>
+    <%= form.text_field :translatey %>
+  </div>
+
+  <div>
+
+    <%= form.range_field :rotate, min:"-365", max:365,list:"valuesrotate" %>
+    <%= form.label :rotate, style: "display: block" %>
+    <datalist id="valuesrotate">
+        <option class="mytextorpic" value="-365" label="rotate <-"></option>
+        <option class="mytextorpic" value="0" label="don't rotate"></option>
+        <option class="mytextorpic" value="365" label="rotate ->"></option>
+    </datalist>
+
+  </div>
+
+  <div>
+    <%= form.label :color, style: "display: block" %>
+    <%= form.text_field :color %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

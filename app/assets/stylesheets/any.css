@@ -38,3 +38,20 @@ body, body *{
 						  text-decoration: none;
 						    cursor: pointer;
 					    }
+					    datalist {
+						      display: flex;
+						        flex-direction: column;
+							  justify-content: space-between;
+							    writing-mode: vertical-lr;
+							      width: 200px;
+						      }
+
+						      option.mytextorpic {
+							        padding: 0;
+							}
+
+							input[type="range"] {
+								  width: 200px;
+								    margin: 0;
+							    }
+

@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: %i[ show edit update destroy ]
+  before_action :set_message, only: %i[ show edit update destroy css]
 
   # GET /messages or /messages.json
   def index
@@ -18,7 +18,17 @@ class MessagesController < ApplicationController
   end
 
   # GET /messages/1/edit
+  def css
+    if @message.pics[0]
+      @message.pics[0].picanimations.new(percent:0)
+    end
+    if @message.texts[0]
+      @message.texts[0].textanimations.new(percent:0)
+    end
+  end
   def edit
+    
+
   end
 
   # POST /messages or /messages.json
