@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
   # GET /messages/1 or /messages/1.json
   def show
     @text=Text.new(message_id:@message.id,fond:"#ffffff")
-    @pic=Pic.new(message_id:@message.id)
+    @pic=Pic.new(message_id:@message.id,width:100,height:100)
   end
 
   # GET /messages/new
@@ -70,6 +70,6 @@ class MessagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def message_params
-      params.require(:message).permit(:sent_by, :body,:user_id,:room_id, :height, :width, :bodyx, :bodyy,:image,:texts_attributes=>{})
+      params.require(:message).permit(:sent_by, :body,:user_id,:room_id, :height, :width, :bodyx, :bodyy,:image,:texts_attributes=>{},:pics_attributes=>{})
     end
 end

@@ -83,6 +83,11 @@
             </td>
 
       </tr>
+        <tr class="tabletext">
+          <td>z-index</td>
+          <td><%=f.number_field :zindex,onchange:"text_#{f.object.id}.style.zIndex=this.value;",onkeyup:"text_#{f.object.id}.style.zIndex=this.value;",max:99%></td>
+
+      </tr>
     </table>
     <%end%>
 
@@ -92,25 +97,39 @@
     <%=form.fields_for :pics do |f|%>
     <table>
         <tr class="tabletext">
-          <td></td>
+          <td>&ensp;</td>
           <td>pic #<%=f.index + 1%></td>
       </tr>
+      <td><%=f.hidden_field :x,id:"message_pics_attributes_#{f.object.id}_x"%>
+          <td><%=f.hidden_field :y,id:"message_pics_attributes_#{f.object.id}_y"%>
         <tr class="tabletext">
-          <td>content</td>
-          <td><%=f.text_field :x%>
+          <td><%=f.label :width%>
+          <td><%=f.text_field :width,onchange:"pic_#{f.object.id}.style.width=this.value;"%>
       </tr>
         <tr class="tabletext">
-          <td>font size</td>
-          <td><%=f.text_field :y%>
+          <td><%=f.label :height%>
+          <td><%=f.text_field :height,onchange:"pic_#{f.object.id}.style.width=this.value;"%>
 
       </tr>
         <tr class="tabletext">
-          <td>content</td>
-          <td><%=f.text_field :width%>
+          <td>couleur fond</td>
+          <td><%=f.color_field :fond,onchange:"pic_#{f.object.id}.style.backgroundColor=this.value;",onkeyup:"pic_#{f.object.id}.style.backgroundColor=this.value;"%></td>
+
       </tr>
         <tr class="tabletext">
-          <td>font size</td>
-          <td><%=f.text_field :height%>
+          <td>fond transparent</td>
+          <td> 
+              <%= f.label :transparent %><br />
+              <%= f.label :transparent, "Oui", value: "true"  %>
+              <%= f.radio_button :transparent, true,onchange:"this.checked ? (pic_#{f.object.id}.style.backgroundColor='transparent') : (pic_#{f.object.id}.style.backgroundColor=message_pics_attributes_#{f.index}_fond.value);" %>
+              <%= f.label :transparent, "Non", value: "false" %>
+              <%= f.radio_button :transparent, false,onchange:"message_pics_attributes_#{f.index}_transparent_true.checked === '1' ? (pic_#{f.object.id}.style.backgroundColor='transparent') : (pic_#{f.object.id}.style.backgroundColor=message_pics_attributes_#{f.index}_fond.value);" %>
+            </td>
+
+      </tr>
+        <tr class="tabletext">
+          <td>z-index</td>
+          <td><%=f.number_field :zindex,onchange:"pic_#{f.object.id}.style.zIndex=this.value;",onkeyup:"pic_#{f.object.id}.style.zIndex=this.value;",max:99%></td>
 
       </tr>
     </table>

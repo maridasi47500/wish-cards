@@ -7,8 +7,83 @@ if (myid11[0]){
 myid=$("#myid1").html(); 
 }
 var mytexts=document.getElementsByClassName("mytext");//message_texts_attributes_0_x   //edit value
+var mypics=document.getElementsByClassName("mypic");//message_texts_attributes_0_x   //edit value
 var ball;
 var balll={};
+var ballll={};
+for (var y = 0;y<mypics.length;y++){
+		                   ballll[y] = mypics[y];
+	ballll[y].onmousedown = function(event) {
+			     myid=event.target.id.split("_")[1];
+		let zatball=event.target;
+		console.log(zatball,myid)
+
+		                   var pic = document.getElementById('mypic'+window.location.pathname.split("/")[2]).getBoundingClientRect();
+	//zatball.style.top="0"+"px";
+	//zatball.style.left="0"+"px";
+		  let addleft = zatball.getBoundingClientRect().left;
+		  let addright= zatball.getBoundingClientRect().top;
+		console.log(addleft,addright);
+		  let shiftX = event.clientX - zatball.getBoundingClientRect().left;
+		  let shiftY = event.clientY - zatball.getBoundingClientRect().top;
+
+
+	console.log(zatball,zatball.style.top);
+		//var div1 = document.createElement('div');
+		//$(div1).addClass("mytext")
+		//    .html(zatball.innerHTML);
+		//
+		//zatball.remove();	
+		//zatball=div1;
+
+
+		  zatball.style.position = 'absolute';
+		  zatball.style.zIndex = 1000;
+
+
+
+		  document.body.append(zatball);
+
+
+		  moveAt(event.pageX, event.pageY);
+
+		     function moveAt(pageX, pageY) {
+
+		  var myball = zatball.getBoundingClientRect();
+		                   var pic = document.getElementById('mypic'+window.location.pathname.split("/")[2]).getBoundingClientRect();
+		                   console.log('message_pics_attributes_'+myid+'_x');
+		                   var msgw = document.getElementById('message_pics_attributes_'+myid+'_x');
+		                   var msgh = document.getElementById('message_pics_attributes_'+myid+"_y");
+		                   console.log('message_pics_attributes_'+myid+"_y",zatball.dataset.top,zatball.dataset.left);
+		         zatball.style.left = pageX - shiftX + 'px';
+		         msgw.value = myball.left - pic.left;
+		             zatball.style.top = pageY - shiftY + 'px';
+
+
+		         msgh.value = myball.top - pic.top;
+		               }
+		
+		                 function onMouseMove(event) {
+		                     moveAt(event.pageX, event.pageY);
+		                       }
+		
+		                         // move the ball on mousemove
+		                           document.addEventListener('mousemove', onMouseMove);
+		
+		                             // drop the ball, remove unneeded handlers
+		                               zatball.onmouseup = function() {
+		                                   document.removeEventListener('mousemove', onMouseMove);
+		                                       zatball.onmouseup = null;
+
+		                                         };
+		
+		                                         };
+		
+		                                         ballll[y].ondragstart = function() {
+		                                           return false;
+		                                           };
+	console.log(ballll)
+}
 for (var i = 0;i<mytexts.length;i++){
 		                   balll[i] = mytexts[i];
 	console.log(mytexts[i]);
@@ -140,6 +215,23 @@ if (ball){
 		                                           };
 }
 $(function(){
+	      if($("#pic-frm")[0]){
+	      $("#pic-frm").on("submit", function(event){
+			                                    console.log("zertyu");
+			                                    var picfrm=$("#pic-frm")[0];
+		              var formData = new FormData(this);
+			                                    $.ajax({url:picfrm.action, type:picfrm.method, 
+								                data:formData,
+								                cache:false,
+								                contentType: false,
+								                processData: false,
+								                                                                        success:function(data){
+																		                                                                                                                  console.log(data);
+																		                                                                                                          }});
+		      event.preventDefault(event);
+		      return false;
+	      });
+	      }
 	      if($("#text-frm")[0]){
 	      $("#text-frm").on("submit", function(event){
 			                                    console.log("zertyu");
