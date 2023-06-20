@@ -65,6 +65,6 @@ class PicsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pic_params
-      params.require(:pic).permit(:filename, :x, :y, :width, :height,:transparent,:fond,:message_id,:zindex)
+      params.require(:pic).permit(:filename, :x, :y, :width, :height,:transparent,:fond,:message_id,:zindex,:duration,:delay)
     end
 end

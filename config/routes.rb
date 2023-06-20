@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'codeform/pics'
+  get 'codeform/texts'
   resources :textanimations
   resources :picanimations
   resources :pics

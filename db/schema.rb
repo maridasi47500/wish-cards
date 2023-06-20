@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_19_130829) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_20_124648) do
   create_table "messages", force: :cascade do |t|
     t.integer "user_id"
     t.integer "room_id"
@@ -48,6 +48,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_19_130829) do
     t.boolean "transparent"
     t.string "fond"
     t.integer "zindex"
+    t.integer "duration"
+    t.integer "delay"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -80,6 +82,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_19_130829) do
     t.string "fond"
     t.boolean "transparent"
     t.integer "zindex"
+    t.integer "duration"
+    t.integer "delay"
   end
 
   create_table "users", force: :cascade do |t|

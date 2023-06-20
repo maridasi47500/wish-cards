@@ -15,10 +15,32 @@
         background:white;
         position:absolute;
       }
+      <%if params[:action] != "css"%>
+      <%message.texts.each do |pic|%>
+
+        <%if pic.textanimations.length > 0 %>
+        .mytextanimation<%=pic.id%> {
+          animation-duration: <%=pic.duration || 3%>s;
+          animation-delay: <%=pic.delay || 0%>s;
+          animation-name: textanimation<%=pic.id%>;
+        }
+      @keyframes textanimation<%=pic.id%> {
+        <%pic.textanimations.each do |x|%>
+          <%=x.percent%>% {
+            transform: translateX(<%=x.translatex.to_i%>px) translateY(<%=x.translatey.to_i%>px) rotate(<%=x.rotate%>deg);
+            color: <%=x.color||"#ffffff"%>;
+                      }
+        <%end%>
+      }
+        <%end%>
+
+      <%end%>
       <%message.pics.each do |pic|%>
+
+        <%if pic.picanimations.length > 0%>
         .mypicanimation<%=pic.id%> {
-          animation-duration: 3s;
-          animation-delay: 0s;
+          animation-duration: <%=pic.duration || 3%>s;
+          animation-delay: <%=pic.delay || 0%>s;
           animation-name: picanimation<%=pic.id%>;
         }
       @keyframes picanimation<%=pic.id%> {
@@ -29,7 +51,9 @@
                       }
         <%end%>
       }
+        <%end%>
 
+      <%end%>
       <%end%>
                                                                                                                                                                                                                                                            #mypic<%=message.id%>{
 
@@ -52,7 +76,7 @@
 
     <%end%>
     <% message.texts.each do |text|%>
-      <div class="mytext" style="z-index:<%=text.zindex || 1000%>;font-weight:<%=text.weight%>;color:<%=text.color%>;font-size:<%=text.size%>px;position:absolute;top:<%=text.y%>px;left:<%=text.x%>px;background-color:<%=text.transparent ? "transparent" : text.fond%>;" id="<%= dom_id text %>">
+      <div  data-myx="<%=text.x%>" data-myy="<%=text.y%>"  class="mytext mytextanimation<%=text.id%>" style="z-index:<%=text.zindex || 1000%>;font-weight:<%=text.weight%>;color:<%=text.color%>;font-size:<%=text.size%>px;position:absolute;top:<%=text.y%>px;left:<%=text.x%>px;background-color:<%=text.transparent ? "transparent" : text.fond%>;" id="<%= dom_id text %>">
               <%= text.content %>
 
         </div>

@@ -2,6 +2,7 @@
 <%=form_with do |ff|%>
                                                                                                                                                                                                                                                                                                                                                      <table>
      <tr>
+       <td>
            <%= ff.label :percent, style: "display: block" %>
                    <%= ff.range_field :percent,list:"values" %>
 
@@ -14,8 +15,22 @@
                                                                                                                                                                                                                                <option class="mytextorpic" value="100" label="fin"></option>
                                                                                                                                                                                                                                                                                          </datalist>
 
+                                                                                                                                                                                                                                                                                                                                                     </td>
+       <td>
+           <%= ff.label :rotate, style: "display: block" %>
+                   <%= ff.range_field :rotate,list:"rotatevalues",value:0,min:-365,max:365 %>
+
+
+                               <datalist id="rotatevalues">
+                                                       <option class="mytextorpic" value="-365" label="rotate <-"></option>
+                                                                                     <option class="mytextorpic" value="0" label="don't rotate"></option>
+                                                                                     <option class="mytextorpic" value="365" label="rotate ->"></option>
+                                                                                                                                                                                                                                                                                         </datalist>
+
+                                                                                                                                                                                                                                                                                                                                                     </td>
                                                                                                                                                                                                                                                                                                                                                      </tr>
                                                                                                                                                                                                                                                                                                                                                      </table>
+
                                                                                                                                                                                                                                                                                                                                                    <%end%>
 
 <%= render "formcss", message: @message %>

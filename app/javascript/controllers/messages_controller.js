@@ -61,7 +61,7 @@ for (var y = 0;y<mypics.length;y++){
 
 
 
-			     if ($("#frm-editmsg")[0] && msgw && msgh){
+			     if ($("#frm-editmsg").length > 0){
 		         msgw.value = myball.left - pic.left;
 		         msgh.value = myball.top - pic.top;
 			     }
@@ -95,10 +95,11 @@ var mypicid=$("#pic_id"+myid)[0];
 var myleft=event.target.getBoundingClientRect().left - pic.left - Number(event.target.dataset.myx);
 var mytop=event.target.getBoundingClientRect().top - pic.top - Number(event.target.dataset.myy);
 
-$.ajax({url:"/codeform/pics",data:{percent:$("#percent").val(), x:myleft,y:mytop, picid: mypicid.dataset.id, objid:myid,picanimid:mypicid.dataset.anim}, success:function(data){
+$.ajax({url:"/codeform/pics",data:{percent:$("#percent").val(),rotate: $("#rotate").val(), x:myleft,y:mytop, picid: mypicid.dataset.id, objid:myid,picanimid:mypicid.dataset.anim}, success:function(data){
 				     console.log("insérer après", $(".pictable"+(mypicid.dataset.myid)));
 				     $(".pictable"+(mypicid.dataset.myid)).after(data);
-	mypicid.dataset.id=Number(mypicid.dataset.id)+1;
+	mypicid.dataset.anim=Number(mypicid.dataset.anim)+1;
+	event.target.style.transform="rotate("+$("#rotate").val()+"deg)";
 }});
 			     }
 
@@ -157,11 +158,13 @@ for (var i = 0;i<mytexts.length;i++){
 		                   var msgh = document.getElementById('message_texts_attributes_'+myid+"_y");
 		                   console.log('message_texts_attributes_'+myid+"_y",zatball.dataset.top,zatball.dataset.left);
 		         zatball.style.left = pageX - shiftX + 'px';
-		         msgw.value = myball.left - pic.left;
 		             zatball.style.top = pageY - shiftY + 'px';
 
 
+			     if ($("#frm-editmsg").length > 0){
+		         msgw.value = myball.left - pic.left;
 		         msgh.value = myball.top - pic.top;
+			     }
 		               }
 		
 		                 function onMouseMove(event) {
@@ -175,6 +178,29 @@ for (var i = 0;i<mytexts.length;i++){
 		                               zatball.onmouseup = function() {
 		                                   document.removeEventListener('mousemove', onMouseMove);
 		                                       zatball.onmouseup = null;
+			     myid=event.target.id.split("_")[1];
+			     if ($("#css-frm")[0]){
+				     console.log("css animations");
+			     }
+			     console.log("[id^='form_textanimations"+myid+"'][value="+$("#percent").val()+"]");
+			     console.log($("#css-frm").length > 0);
+			     console.log($("[id^='form_textanimations"+myid+"'][value="+$("#percent").val()+"]").length == 0);
+			     if ($("#css-frm").length > 0 && $("[id^='form_textanimations"+myid+"'][value="+$("#percent").val()+"]").length === 0){
+
+var mypicid=$("#text_id"+myid)[0];
+				     console.log("ajoute un champ");
+				     console.log(mypicid);
+		                   var pic = document.getElementById('mypic'+window.location.pathname.split("/")[2]).getBoundingClientRect();
+var myleft=event.target.getBoundingClientRect().left - pic.left - Number(event.target.dataset.myx);
+var mytop=event.target.getBoundingClientRect().top - pic.top - Number(event.target.dataset.myy);
+
+$.ajax({url:"/codeform/texts",data:{color:event.target.style.color,rotate: $("#rotate").val(), percent:$("#percent").val(), x:myleft,y:mytop, picid: mypicid.dataset.id, objid:myid,picanimid:mypicid.dataset.anim}, success:function(data){
+				     console.log("insérer après", $(".texttable"+(mypicid.dataset.myid)));
+				     $(".texttable"+(mypicid.dataset.myid)).after(data);
+	event.target.style.transform="rotate("+$("#rotate").val()+"deg)";
+	mypicid.dataset.anim=Number(mypicid.dataset.anim)+1;
+}});
+			     }
 
 		                                         };
 		

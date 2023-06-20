@@ -8,8 +8,8 @@ class MessagesController < ApplicationController
 
   # GET /messages/1 or /messages/1.json
   def show
-    @text=Text.new(message_id:@message.id,fond:"#ffffff")
-    @pic=Pic.new(message_id:@message.id,width:100,height:100)
+    @text=Text.new(message_id:@message.id,fond:"#ffffff",duration:3, delay:0)
+    @pic=Pic.new(message_id:@message.id,width:100,height:100,duration:3,delay:0)
   end
 
   # GET /messages/new
@@ -19,12 +19,12 @@ class MessagesController < ApplicationController
 
   # GET /messages/1/edit
   def css
-    if @message.pics[0]
-      @message.pics[0].picanimations.new(percent:0)
-    end
-    if @message.texts[0]
-      @message.texts[0].textanimations.new(percent:0)
-    end
+    #if @message.pics[0]
+    #  @message.pics[0].picanimations.new(percent:0)
+    #end
+    #if @message.texts[0]
+    #  @message.texts[0].textanimations.new(percent:0)
+    #end
   end
   def edit
     

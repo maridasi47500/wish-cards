@@ -47,7 +47,7 @@
   <div class="mytexts">
 
     <%=form.fields_for :texts do |f|%>
-    <table>
+      <table class="texttable<%=f.object.id%>">
         <tr class="tabletext">
           <td></td>
           <td>text #<%=f.index + 1%></td>
@@ -94,13 +94,68 @@
           <td><%=f.number_field :zindex,onchange:"text_#{f.object.id}.style.zIndex=this.value;",onkeyup:"text_#{f.object.id}.style.zIndex=this.value;",max:99%></td>
 
       </tr>
+        <tr class="tabletext">
+          <td><%=f.label :duration%></td>
+          <td><%=f.number_field :duration%></td>
+
+      </tr>
+        <tr class="tabletext">
+          <td><%=f.label :delay%></td>
+          <td><%=f.number_field :delay%></td>
+
+      </tr>
     </table>
     <%=f.fields_for :textanimations do |ff|%>
-    <table>
+      <table class="textanimationtable<%=ff.index%>_id<%=f.object.id%>" data-picid="<%=f.index%>" data-animid="<%=ff.index+1%>">
         <tr class="tabletext">
           <td>&ensp;</td>
           <td>text animation #<%=ff.index + 1%></td>
       </tr>
+      <tr>
+        <td><%= ff.label :percent, style: "display: block" %></td>
+        <td><%= ff.range_field :percent,list:"values",id:"form_textanimations#{f.object.id}_#{ff.index}" %>
+
+
+            <datalist id="values">
+                      <option class="mytextorpic" value="0" label="début"></option>
+                              <option class="mytextorpic" value="25" label="vers le début"></option>
+                                      <option class="mytextorpic" value="50" label="milieu"></option>
+                                              <option class="mytextorpic" value="75" label="vers la fin"></option>
+                                                      <option class="mytextorpic" value="100" label="fin"></option>
+            </datalist></td>
+
+                                                            </tr>
+
+                                                              <tr>
+                                                                <td> <%= ff.label :translatex, style: "display: block" %></td>
+                                                                <td><%= ff.text_field :translatex %></td>
+                                                                          </tr>
+
+                                                                            <tr>
+                                                                              <td> <%= ff.label :translatey, style: "display: block" %></td>
+                                                                              <td><%= ff.text_field :translatey %></td>
+                                                                                        </tr>
+
+                                                                                          <tr>
+
+
+                                                                                            <td> <%= ff.label :rotate, style: "display: block" %></td>
+                                                                                            <td><%= ff.range_field :rotate, min:"-365", max:365,list:"valuesrotate" %>
+                                                                                                        <datalist id="valuesrotate">
+
+                                                                                                                  <option class="mytextorpic" value="-365" label="rotate <-"></option>
+                                                                                                                          <option class="mytextorpic" value="0" label="don't rotate"></option>
+                                                                                                                                  <option class="mytextorpic" value="365" label="rotate ->"></option>
+                                                                                                                                      </datalist>
+
+                                                                                                                                        </td>
+                                                                                                                                        </tr>
+
+                                                                                                                                          <tr>
+                                                                                                                                            <td>    <%= ff.label :color, style: "display: block" %>
+                                                                                                                                            </td>
+                                                                                                                                            <td>    <%= ff.color_field :color %></td>
+                                                                                                                                                      </tr>
 
     </table>
     <%end%>
@@ -146,6 +201,16 @@
         <tr class="tabletext">
           <td>z-index</td>
           <td><%=f.number_field :zindex,onchange:"pic_#{f.object.id}.style.zIndex=this.value;",onkeyup:"pic_#{f.object.id}.style.zIndex=this.value;",max:99%></td>
+
+      </tr>
+        <tr class="tabletext">
+          <td><%=f.label :duration%></td>
+          <td><%=f.number_field :duration%></td>
+
+      </tr>
+        <tr class="tabletext">
+          <td><%=f.label :delay%></td>
+          <td><%=f.number_field :delay%></td>
 
       </tr>
     </table>

@@ -1,14 +1,16 @@
-<%=fields_for :message,Message.new, :include_id => false do |msg|%>
-  <%=msg.fields_for :pics, Pic.new, :child_index => params[:picid], :include_id => false do |f|%>
-    <%=f.fields_for :picanimations, Picanimation.new(rotate:params[:rotate],translatex: params[:x], percent:params[:percent],translatey: params[:y]),:child_index=>params[:picanimid],:include_id => false  do |ff|%>
-            <table class="picanimationtable<%=ff.index%>_id<%=params[:objid]%>" data-picid="<%=f.index%>">
+  <%=fields_for :message,Message.new, :include_id => false do |msg|%>
+
+      <%=msg.fields_for :texts,Message.new.texts.new(content:""), :child_index => params[:picid].to_i, :include_id => false do |f|%>
+
+    <%=f.fields_for :textanimations, Textanimation.new(color:params[:color],rotate: params[:rotate], translatex: params[:x], percent:params[:percent],translatey: params[:y]),:child_index=>params[:picanimid],:include_id => false  do |ff|%>
+            <table class="textanimationtable<%=ff.index%>_id<%=params[:objid]%>" data-picid="<%=f.index%>">
                       <tr class="tabletext">
                                   <td>&ensp;</td>
-                                            <td> animation for pic #<%=params[:picid].to_i + 1%></td>
+                                            <td> animation for text #<%=params[:picid].to_i + 1%></td>
                                                   </tr>
                                                         <tr>
                                                                   <td><%= ff.label :percent, style: "display: block" %></td>
-                                                                          <td><%= ff.range_field :percent,list:"values",id:"form_picanimations#{params[:objid]}_#{ff.index}" %>
+                                                                          <td><%= ff.range_field :percent,list:"values",id:"form_textanimations#{params[:objid]}_#{ff.index}" %>
 
 
                                                                                       <datalist id="values">
