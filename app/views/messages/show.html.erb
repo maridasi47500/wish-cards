@@ -1,11 +1,4 @@
 <p style="color: green"><%= notice %></p>
-
-<%= render @message %>
-<%if @message.music%>
-    <audio src="/uploads/<%=@message.music%>" type="audio/mp3" id="myaudio" autoplay=""/>
-<%end%>
-  <div data-chat-room="<%=@message.room.name%>">
-          </div>
 <button id="myBtnemail">Envoyer à un(e) ami(e)</button>
 
 <!-- The Modal -->
@@ -42,6 +35,14 @@
                                                         </div>
 
 </div>
+
+<%= render @message %>
+<%if @message.music%>
+    <audio src="/uploads/<%=@message.music%>" type="audio/mp3" id="myaudio" autoplay=""/>
+<%end%>
+  <div data-chat-room="<%=@message.room.name%>">
+          </div>
+
 <div>
   <%= link_to "Edit this message", edit_message_path(@message) %> |
   <%= link_to "Back to messages", messages_path %>

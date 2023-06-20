@@ -2,12 +2,29 @@
 <html>
     <head>
           <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+<style>
+                    <%=render "messages/cssmessage", message:@card%>
+                    .mytextsandpics {
+                              position:absolute;
+                                      top:200px;
+                                              right:400px;
+                    }
+                    .mypics {
+                    }
+                    .mytexts {
+                    }
+                    tr.tabletext{border:1px solid black;}
+                    body, body *{
+                              font-size:16px;
+                                      font-family:sans serif;
+                    }
+</style>
             </head>
               <body>
                     <h1>Hey ! Cette carte de voeux est pour toi</h1>
                     <%=render @card%>
-                    <%if @message.music%>
-                          <audio src="/uploads/<%=@message.music%>" type="audio/mp3" id="myaudio" autoplay=""/>
+                    <%if @card.music%>
+                          <audio src="/uploads/<%=@card.music%>" type="audio/mp3" id="myaudio" autoplay=""/>
                           <%end%>
                                                             </body>
 </html>

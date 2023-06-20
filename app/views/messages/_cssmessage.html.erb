@@ -1,5 +1,3 @@
-<div id="<%= dom_id message %>">
-<style>
 #move<%=message.id%> {
         <%if params[:controller] == "messages" && params[:action] != "edit"%>
           display:none;
@@ -67,29 +65,4 @@
                                                                                                                                                                                                                                                                         left:<%=message.bodyx%>px;
                                                                                                                                                                                                                                                                           top:<%=message.bodyy%>px;
                                                                                                                                                                                                                                                                           }
-                                                                                                                                                                                                                                                                      </style>
 
-                                                                                                                                                                                                                                                                     <div id="mypic<%=message.id%>" >
-    <span class="speaker"><%=message.sent_by%> (<%=message.user.email%>)</span>
-    <% message.pics.each do |text|%>
-      <img data-myx="<%=text.x%>" data-myy="<%=text.y%>" class="mypic mypicanimation<%=text.id%>" id="<%= dom_id text %>" style="z-index:<%=text.zindex || 99%>;position:absolute;top:<%=text.y%>px;left:<%=text.x%>px;width:<%=text.width%>px;height:<%=text.height%>px;background-color:<%=text.transparent ? "transparent" : text.fond%>;" src="/uploads/<%=text.filename%>"/>
-
-    <%end%>
-    <% message.texts.each do |text|%>
-      <div  data-myx="<%=text.x%>" data-myy="<%=text.y%>"  class="mytext mytextanimation<%=text.id%>" style="z-index:<%=text.zindex || 99%>;font-weight:<%=text.weight%>;color:<%=text.color%>;font-size:<%=text.size%>px;position:absolute;top:<%=text.y%>px;left:<%=text.x%>px;background-color:<%=text.transparent ? "transparent" : text.fond%>;" id="<%= dom_id text %>">
-              <%= text.content %>
-
-        </div>
-    <%end%>
-                                                                                                                                                                                                                                                                          <div id="move<%=message.id%>">
-
-                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                    <div id="mybody<%=message.id%>">
-                                                                                                                                                                                                                                                                                         <%=message.body%>
-                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                          <img  id="cettepic<%=message.id%>" src="<%=message.image ? "/uploads/"+message.image : "/mypic"%>" width="100%" height="100%" isMap />
-                                                                                                                                                                                                                                                                                            </div>
-
-                                                                                                                                      <a href="/messages/<%=message.id%>/edit">editer</a>
-                                                                                                                                      <a href="/messages/<%=message.id%>">voir</a>
-</div>

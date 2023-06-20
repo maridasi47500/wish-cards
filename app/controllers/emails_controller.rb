@@ -25,7 +25,7 @@ class EmailsController < ApplicationController
 
     respond_to do |format|
       if @email.save
-        UserMailer.with(message: @email.message, email: @email.email, title: @email.title).welcome_email.deliver_later
+        UserMailer.with(message: @email.message, email: @email.email, title: @email.title).welcome_email.deliver
         format.html { redirect_to email_url(@email), notice: "Email was successfully created." }
         format.json { render :show, status: :created, location: @email }
       else

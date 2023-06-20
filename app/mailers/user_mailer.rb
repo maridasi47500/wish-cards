@@ -3,6 +3,6 @@ class UserMailer < ApplicationMailer
 
   def welcome_email
     @card = params[:message]
-    mail(to: params[:email], subject: params[:subject])
+    mail(to: params[:email], subject: params[:title])
   end
 end
