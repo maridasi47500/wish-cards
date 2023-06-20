@@ -14,4 +14,13 @@ class Message < ApplicationRecord
   def image
     read_attribute(:image)
   end
+  def music=(uploaded_io)
+    File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+        file.write(uploaded_io.read)
+    end
+    write_attribute(:music, uploaded_io.original_filename)
+  end
+  def music
+    read_attribute(:music)
+  end
 end

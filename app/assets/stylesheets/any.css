@@ -2,7 +2,7 @@ body, body *{
 	font-size:16px;
 	font-family:sans serif;
 }
-.modal,.modalpic {
+.modal,.modalpic,.modalemail {
 	  display: none; /* Hidden by default */
 	    position: fixed; /* Stay in place */
 	      z-index: 100; /* Sit on top */
@@ -16,7 +16,7 @@ body, body *{
 		    }
 
 		    /* Modal Content/Box */
-		    .modal-content,.modal-contentpic {
+		    .modal-content,.modal-contentpic,.modal-contentemail {
 			      background-color: #fefefe;
 			        margin: 15% auto; /* 15% from the top and centered */
 				  padding: 20px;
@@ -25,7 +25,7 @@ body, body *{
 			      }
 
 			      /* The Close Button */
-			      .close,.closepic {
+			      .close,.closepic,.closeemail {
 				        color: #aaa;
 					  float: right;
 					    font-size: 28px;
@@ -33,7 +33,7 @@ body, body *{
 				      }
 
 				      .close:hover,
-				      .close:focus, .closepic:hover,.closepic:focus {
+				      .close:focus, .closeemail:hover, .closeemail:focus, .closepic:hover,.closepic:focus {
 					        color: black;
 						  text-decoration: none;
 						    cursor: pointer;

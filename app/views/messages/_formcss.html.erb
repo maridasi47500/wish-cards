@@ -45,9 +45,11 @@
   </div>
   <div class="mytextsandpics">
   <div class="mytexts">
-
+    <table>
+      <tr>
     <%=form.fields_for :texts do |f|%>
-      <table class="texttable<%=f.object.id%>">
+      <td class="texttable<%=f.object.id%>">
+      <table>
         <tr class="tabletext">
           <td></td>
           <td>text #<%=f.index + 1%></td>
@@ -158,14 +160,20 @@
                                                                                                                                                       </tr>
 
     </table>
+    </td>
     <%end%>
     <%end%>
+    </tr>
+    </table>
 
   </div>
   <div class="mypics">
+    <table>
+    <tr>
 
     <%=form.fields_for :pics do |f|%>
-      <table class="pictable<%=f.object.id%>">
+      <td class="pictable<%=f.object.id%>">
+      <table>
         <tr class="tabletext">
           <td>&ensp;</td>
           <td>pic #<%=f.index + 1%></td>
@@ -266,8 +274,12 @@
                                                                                                                                             <td>    <%= ff.color_field :color %></td>
                                                                                                                                                       </tr>
     </table>
+    </td>
     <%end%>
     <%end%>
+    </tr>
+    </table>
+
 
   </div>
   </div>

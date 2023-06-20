@@ -1,4 +1,9 @@
-
+window.onload=function(){
+if($("#myaudio").length > 0){
+	myaudio.muted=false;
+	    myaudio.play();
+}
+}
 
 console.log("okok bienvenue messages");
 var myid11=$("#myid1"); 

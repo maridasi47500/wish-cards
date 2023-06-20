@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :emails
   get 'codeform/pics'
   get 'codeform/texts'
   resources :textanimations

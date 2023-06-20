@@ -19,6 +19,25 @@
      }
 
      // When the user clicks anywhere outside of the modal, close it
+ var modalemail = document.getElementById("myModalemail");
+
+ // Get the button that opens the modal
+ var btnemail = document.getElementById("myBtnemail");
+
+ // Get the <span> element that closes the modal
+ var spanemail = document.getElementsByClassName("closeemail")[0];
+
+ // When the user clicks on the button, open the modal
+ btnemail.onclick = function() {
+   modalemail.style.display = "block";
+   }
+
+   // When the user clicks on <span> (x), close the modal
+   spanemail.onclick = function() {
+     modalemail.style.display = "none";
+     }
+
+     // When the user clicks anywhere outside of the modal, close it
 // Get the modal
  var modalpic = document.getElementById("myModalpic");
 
@@ -45,5 +64,8 @@
              }
        if (event.target == modalpic) {
            modalpic.style.display = "none";
+             }
+       if (event.target == modalemail) {
+           modalemail.style.display = "none";
              }
              } 

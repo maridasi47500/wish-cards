@@ -1,25 +1,15 @@
 # README
+# Bienvenue de l'appli de carte de voeux html
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+* Rails 7
 
-* Ruby version
 
-* System dependencies
 
-* Configuration
+on peut :
+* créer une carte de voeux, ajouter texte et image.
+* cliquer/cliquer-déposer les images/textes 
+* éditer le début -fin de l'animation css
+* faire tourner l'image/le texte
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# wish-cards

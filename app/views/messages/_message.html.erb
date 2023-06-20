@@ -15,7 +15,7 @@
         background:white;
         position:absolute;
       }
-      <%if params[:action] != "css"%>
+      <%if !["css","edit"].include?(params[:action])%>
       <%message.texts.each do |pic|%>
 
         <%if pic.textanimations.length > 0 %>

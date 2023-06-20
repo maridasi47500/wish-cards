@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_20_124648) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_20_174018) do
   create_table "messages", force: :cascade do |t|
     t.integer "user_id"
     t.integer "room_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_20_124648) do
     t.integer "bodyx"
     t.integer "bodyy"
     t.string "image"
+    t.string "music"
   end
 
   create_table "picanimations", force: :cascade do |t|

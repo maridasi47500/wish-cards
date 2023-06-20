@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+          <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+            </head>
+              <body>
+                    <h1>Hey ! Cette carte de voeux est pour toi</h1>
+                    <%=render @card%>
+                    <%if @message.music%>
+                          <audio src="/uploads/<%=@message.music%>" type="audio/mp3" id="myaudio" autoplay=""/>
+                          <%end%>
+                                                            </body>
+</html>
