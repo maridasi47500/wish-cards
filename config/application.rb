@@ -11,6 +11,8 @@ module Newapplication
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.action_cable.mount_path = '/websocket'
+    config.assets.precompile += %w(.png .jpg .wav)
+
 
     # Configuration for the application, engines, and railties goes here.
     #

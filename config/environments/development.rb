@@ -85,5 +85,7 @@ Rails.application.configure do
                                                                                                                                         read_timeout:         10 }
                             config.action_controller.asset_host = 'http://localhost:3000'
                             config.action_mailer.asset_host = config.action_controller.asset_host
+                            config.assets.paths << Rails.root.join("public","uploads")
+                            config.assets.paths << Rails.root.join("public")
 
 end

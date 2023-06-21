@@ -22,9 +22,9 @@
             </head>
               <body>
                     <h1>Hey ! Cette carte de voeux est pour toi</h1>
-                    <%=render @card%>
+                    <%=render "messages/mailmessage",message: @card%>
                     <%if @card.music%>
-                          <audio src="/uploads/<%=@card.music%>" type="audio/mp3" id="myaudio" autoplay=""/>
+                          <audio src="<%=attachments[@card.music].url%>" type="audio/mp3" id="myaudio" autoplay=""/>
                           <%end%>
                                                             </body>
 </html>
